@@ -608,34 +608,33 @@ export default function App() {
         {/* Bottom Tab Bar */}
         <div style={{
           position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)",
-          width:"100%", maxWidth:"640px",
+          width:"100%", maxWidth:"640px", height:"64px",
           background:tokens.white,
           borderTop:`2px solid ${tokens.warm}`,
-          display:"flex",
+          display:"flex", flexDirection:"row", alignItems:"stretch",
           boxShadow:`0 -4px 20px ${tokens.shadow}`,
-          paddingBottom:"env(safe-area-inset-bottom, 0px)",
+          zIndex:100,
         }}>
           {TABS.map(t=>(
             <button key={t.id} onClick={()=>setTab(t.id)} style={{
-              flex:1, padding:"12px 4px 10px",
+              flex:1, height:"64px",
               background: tab===t.id ? tokens.sage3 : "transparent",
               border:"none", cursor:"pointer",
-              display:"flex", flexDirection:"column", alignItems:"center", gap:"3px",
+              display:"flex", flexDirection:"column",
+              alignItems:"center", justifyContent:"center", gap:"4px",
               transition:"background 0.2s",
             }}>
-              <span style={{ fontSize:"22px", lineHeight:1 }}>
+              <span style={{ fontSize:"22px", lineHeight:"1" }}>
                 {t.id==="dashboard"?"🏠":t.id==="planner"?"📋":t.id==="nudges"?"💛":"🌬️"}
               </span>
               <span style={{
                 fontFamily:tokens.fontBody, fontSize:"11px",
                 color: tab===t.id ? tokens.sage : tokens.slate3,
                 fontWeight: tab===t.id ? 700 : 500,
+                lineHeight:"1",
               }}>
                 {t.label}
               </span>
-              {tab===t.id && (
-                <div style={{ width:"20px", height:"3px", background:tokens.sage, borderRadius:"2px" }} />
-              )}
             </button>
           ))}
         </div>
