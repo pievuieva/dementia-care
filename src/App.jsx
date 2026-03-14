@@ -582,7 +582,7 @@ export default function App() {
         body { background: ${tokens.cream}; min-height: 100vh; }
       `}</style>
 
-      <div style={{ fontFamily:tokens.fontBody, maxWidth:"640px", margin:"0 auto", padding:"0 0 80px" }}>
+      <div style={{ fontFamily:tokens.fontBody, maxWidth:"640px", margin:"0 auto", padding:"0 0 90px" }}>
         {/* Top Nav */}
         <div style={{
           position:"sticky", top:0, zIndex:100,
@@ -610,24 +610,32 @@ export default function App() {
           position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)",
           width:"100%", maxWidth:"640px",
           background:tokens.white,
-          borderTop:`1px solid ${tokens.warm}`,
+          borderTop:`2px solid ${tokens.warm}`,
           display:"flex",
           boxShadow:`0 -4px 20px ${tokens.shadow}`,
+          paddingBottom:"env(safe-area-inset-bottom, 0px)",
         }}>
           {TABS.map(t=>(
             <button key={t.id} onClick={()=>setTab(t.id)} style={{
               flex:1, padding:"12px 4px 10px",
-              background:"transparent", border:"none",
-              cursor:"pointer",
-              color: tab===t.id ? tokens.sage : tokens.slate3,
-              fontFamily:tokens.fontBody, fontSize:"11px", fontWeight: tab===t.id ? 700 : 500,
-              borderTop: tab===t.id ? `3px solid ${tokens.sage}` : "3px solid transparent",
-              transition:"all 0.2s",
+              background: tab===t.id ? tokens.sage3 : "transparent",
+              border:"none", cursor:"pointer",
+              display:"flex", flexDirection:"column", alignItems:"center", gap:"3px",
+              transition:"background 0.2s",
             }}>
-              <div style={{ fontSize:"18px", marginBottom:"2px" }}>
+              <span style={{ fontSize:"22px", lineHeight:1 }}>
                 {t.id==="dashboard"?"🏠":t.id==="planner"?"📋":t.id==="nudges"?"💛":"🌬️"}
-              </div>
-              {t.label}
+              </span>
+              <span style={{
+                fontFamily:tokens.fontBody, fontSize:"11px",
+                color: tab===t.id ? tokens.sage : tokens.slate3,
+                fontWeight: tab===t.id ? 700 : 500,
+              }}>
+                {t.label}
+              </span>
+              {tab===t.id && (
+                <div style={{ width:"20px", height:"3px", background:tokens.sage, borderRadius:"2px" }} />
+              )}
             </button>
           ))}
         </div>
